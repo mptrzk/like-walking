@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <script>
+      const $ = x => document.querySelector(x);
+
+			function getRandomIntInclusive(min, max) {
+				min = Math.ceil(min);
+				max = Math.floor(max);
+				return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
+			}
+
+      var a;
+      var b;
+      var streak = 0;
+
+      function ask() {
+        a = getRandomIntInclusive(0, 9);
+        b = getRandomIntInclusive(0, 9);
+        $('#q').innerText = `${a} + ${b} = ???` 
+      }
+
+      function check(event) {
+        if (event.key == 'Enter' || event.key == ' ' || event.key == 'Backspace') {
+          event.preventDefault();
+          if (parseInt($('#ans').value) === a + b) { 
+            streak++;
+            ask();
+          }
+          else streak = 0;
+          $('#streak').innerHTML = `streak: ${streak}`;
+          $('#streak').style.color = streak ? 'black' : 'red';
+          $('#ans').value = '';
+        }
+      }
+
+      function init() {
+        $('#ans').focus();
+        ask();
+      }
+    </script>
+  </head>
+  <body onload='init()'>
+    <div id='q'>
+    </div> 
+    <input id='ans' onkeydown='check(event)'> 
+    <div id='streak'> streak: 0 </div>
+  </body>
+</html>
