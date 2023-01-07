@@ -1,5 +1,7 @@
 <html>
   <head>
+    <style>
+    </style>
     <script>
       const $ = x => document.querySelector(x);
 
@@ -13,29 +15,40 @@
       var b;
       var streak = 0;
 
-      function ask() {
-        a = getRandomIntInclusive(0, 9);
-        b = getRandomIntInclusive(0, 9);
-        $('#q').innerText = `${a} + ${b} = ???` 
+      function ask(fresh=true) {
+        if (fresh) {
+          a = getRandomIntInclusive(0, 9);
+          b = getRandomIntInclusive(0, 9);
+        }
+        //document.body.style.fontSize = `${20 * Math.cbrt(streak + 1)}px`;
+        $('#q').innerText = `${a} + ${b} = ???`;
+        $('#streak').innerHTML = `streak: ${streak}`;
+        $('#streak').style.color = streak ? 'black' : 'red';
+        $('#ans').value = '';
       }
+
 
       function check(event) {
         if (event.key == 'Enter' || event.key == ' ' || event.key == 'Backspace') {
           event.preventDefault();
-          if (parseInt($('#ans').value) === a + b) { 
+          if (parseInt($('#ans').value) === a + b) {
             streak++;
-            ask();
+            ask(true)
           }
-          else streak = 0;
-          $('#streak').innerHTML = `streak: ${streak}`;
-          $('#streak').style.color = streak ? 'black' : 'red';
-          $('#ans').value = '';
+          else {
+            streak = 0;
+            ask(false);
+          }
+          //TODO DRY
+          //TODO move to ask?
+          // bad answer shouldn't reset question
+          // then make ask take a bool whether to repeat
         }
       }
 
       function init() {
         $('#ans').focus();
-        ask();
+        ask(true);
       }
     </script>
   </head>
@@ -43,6 +56,6 @@
     <div id='q'>
     </div> 
     <input id='ans' onkeydown='check(event)'> 
-    <div id='streak'> streak: 0 </div>
+    <div id='streak'>  streak: 0 </div>
   </body>
 </html>
