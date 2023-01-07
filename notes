@@ -92,3 +92,62 @@ adding component
 deleting component
 
 failure at compression
+
+pushing a branch
+
+==================================================
+;PREACT
+
+
+children
+
+stuff.id?
+
+lifecycle stuff
+  doing it with hooks?
+
+move to frontcomp?
+
+passing description
+  a tag?
+
+make a repo for notes?
+
+analyzing htm
+  weird template stuff
+  read the code
+  props without ${}
+
+initializing reducer with props
+
+let's go with tree view first
+
+leaves are collapsible too
+
+tree view
+  button and title
+  open/closed state
+  displays children in a slightly indented div
+
+how inline-block display works anyway?
+
+collapsing clears state
+
+use underscore font?
+
+constant init props
+  some lifecycle thingy?
+  reducer?
+
+answer buffer & key action?
+
+answer closure
+
+==================================================
+;UNCATEGORIZED
+
+monospaced font?
+
+no button?
+
+initialize leaf with an object
