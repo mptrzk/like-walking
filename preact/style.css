@@ -5,13 +5,29 @@ body {
   color: #131;
 }
 
+.foo {
+  position: relative;
+}
+
+.bar {
+  z-index: -2;
+  position: absolute;
+  text-decoration: underline;
+}
+
+.baz {
+  z-index: -1;
+  position: absolute;
+  background: #bdd;
+}
+
 .ans {
   display: inline-block;
   padding-bottom: -0.1em;
-  border-bottom: 1.3px solid #131;
-  clear: both;
-  min-width: 5em;
+  /*border-bottom: 1.3px solid #131;*/
+  min-width: 3em;
   outline: transparent;
+  text-decoration: underline;
 }
 
 .tree-header {

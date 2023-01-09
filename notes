@@ -170,6 +170,8 @@ game generation
   games generated outside of app component with passing props
   task generators separate from game markup
 
+key action
+
 ==================================================
 ;TASK EXAMPLES
 
@@ -186,7 +188,11 @@ shaded box
   bit meh, maybe use a proper HSV color picker
 underline
   underlined spaces?
-  
+  3-layer hack
+    yeah!
+    make it line independent
+    figure out how to remove that +1 hack
+     
 
 
 ==================================================

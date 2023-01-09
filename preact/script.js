@@ -18,8 +18,27 @@ const Tree = props => {
   `;
 }
 
-//closure around?
 
+//update
+const Foo = props => {
+  const [state, setState] = useState(0);
+  //first just wrap passed event
+  const f = e => {
+    props.onkeydown(e);
+    const len = e.target.innerText.length;
+    setState(len + ((e.key.length  == 1 && e.key != ' ') ? 1 : 0)); //same condition as below, but hackier
+  }
+  return ht`
+    <span class='foo'>
+      <span class='bar'>${'\u00a0'.repeat(5)}<//>
+      <span class='baz'>${'\u00a0'.repeat(state)}<//>
+      <span class='ans' onkeydown=${f} contenteditable spellcheck=${false}>
+      <//>
+    <//>
+  `;
+}
+
+//closure around?
 const Game = props => {
   const [state, setState] = useState({streak: 0, task: props.taskGen()});
   const keydown = e => {
@@ -40,8 +59,7 @@ const Game = props => {
       Q: ${state.task.question}
       <div>
         ${'A: '} 
-        <span class='ans' onkeydown=${keydown} contenteditable spellcheck=${false}>
-        <//>
+        <${Foo} onkeydown=${keydown}/>
       <//>
       streak: ${state.streak}
 
