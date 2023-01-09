@@ -98,7 +98,6 @@ pushing a branch
 ==================================================
 ;PREACT
 
-
 children
 
 stuff.id?
@@ -143,8 +142,33 @@ answer buffer & key action?
 
 answer closure
 
+game generation
+  problem
+    wrestling with props syntax
+    not performing unnecessary computation
+  just pass titles and afns as props
+  game as a class component
+  closure around game component
+    call that makeGame?
+  makeGame that returns a game component
+  games generated outside of app component with makeGame or something
+  games generated outside of app component with passing props
+
 ==================================================
 ;UNCATEGORIZED
+
+task:
+  () => question, validation function
+
+validaiton by:
+  reference answer
+    only one good answer
+  reference answer list
+    finitely* many good answers
+  validation function
+  reference answer and equivalence predicate
+    both higher order and stateful
+    lousy
 
 monospaced font?
 

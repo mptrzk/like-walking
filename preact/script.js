@@ -20,7 +20,6 @@ const Tree = props => {
 
 //closure around?
 
-const makeGame = (title, gen) => {
 const Game = props => {
   const [state, setState] = useState({streak: 0, task: props.gen()});
   const keydown = e => {
