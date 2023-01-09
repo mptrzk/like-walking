@@ -21,9 +21,9 @@ const Tree = props => {
 //closure around?
 
 const Game = props => {
-  const [state, setState] = useState({streak: 0, task: props.gen()});
+  const [state, setState] = useState({streak: 0, task: props.taskGen()});
   const keydown = e => {
-    if (!(e.key == ' ' || e.key == 'Enter')) return;
+    if (!(e.key == ' ' || e.key == 'Enter' || e.key == 'Backspace')) return; //abstract away?
     e.preventDefault();
     const ans = e.target.innerText;
     e.target.innerText = '';
@@ -31,16 +31,15 @@ const Game = props => {
     const passed = task.validate(ans);
     setState({
       streak: passed ? streak + 1 : 0,
-      task: passed ? props.gen() : task
+      task: passed ? props.taskGen() : task
     });
   }
-  //state instead of reducer?
   //TODO floating underline
   return ht`
     <${Tree} title=${props.title}>
-      Q:${state.task.question}
+      Q: ${state.task.question}
       <div>
-        A:
+        ${'A: '} 
         <span class='ans' onkeydown=${keydown} contenteditable spellcheck=${false}>
         <//>
       <//>
@@ -50,8 +49,20 @@ const Game = props => {
   `;
 }
 
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
+}
 
-//Variant1 - game from props
+const add1 = () => {
+  const a = getRandomIntInclusive(0, 9);
+  const b = getRandomIntInclusive(0, 9);
+  return {
+    question: `${a} + ${b} = ???`,
+    validate: ans => parseInt(ans) === a + b
+  }
+}
 
 //memoize game?
 const App = props => {
@@ -64,12 +75,7 @@ const App = props => {
         <u>hello uriel<//>
         <${Game}
          title='Walprawn'
-         gen=${() => {
-                return {
-                question: 'what?',
-                validate: ans => (ans === 'none')}
-               }
-              }/>
+         taskGen=${add1}/>
       <//>
       <div>baz<//>
     <//>

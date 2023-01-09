@@ -129,33 +129,18 @@ tree view
   displays children in a slightly indented div
 
 how inline-block display works anyway?
+  like inline, but can set width and stuff?
 
 collapsing clears state
 
-use underscore font?
 
 constant init props
   some lifecycle thingy?
   reducer?
 
-answer buffer & key action?
-
-answer closure
-
-game generation
-  problem
-    wrestling with props syntax
-    not performing unnecessary computation
-  just pass titles and afns as props
-  game as a class component
-  closure around game component
-    call that makeGame?
-  makeGame that returns a game component
-  games generated outside of app component with makeGame or something
-  games generated outside of app component with passing props
 
 ==================================================
-;UNCATEGORIZED
+;MECHANICS
 
 task:
   () => question, validation function
@@ -170,8 +155,41 @@ validaiton by:
     both higher order and stateful
     lousy
 
-monospaced font?
+answer buffer & key action?
 
-no button?
+game generation
+  problem
+    wrestling with props syntax
+    not performing unnecessary computation
+  just pass titles and afns as props
+  game as a class component
+  closure around game component
+    call that makeGame?
+  makeGame that returns a game component
+  games generated outside of app component with makeGame or something
+  games generated outside of app component with passing props
+  task generators separate from game markup
 
-initialize leaf with an object
+==================================================
+;TASK EXAMPLES
+
+type a string form memory
+count characters
+fraction arithmetic
+area of a triangle in an SVG
+
+
+==================================================
+;UI
+
+shaded box
+  bit meh, maybe use a proper HSV color picker
+underline
+  underlined spaces?
+  
+
+
+==================================================
+;UNCATEGORIZED
+
+
