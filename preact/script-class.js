@@ -1,4 +1,5 @@
-import {render, h} from 'https://cdn.skypack.dev/preact';
+import 'https://cdn.skypack.dev/preact/debug';
+import {render, h, Component} from 'https://cdn.skypack.dev/preact';
 import {useState, useReducer} from 'https://cdn.skypack.dev/preact/hooks'; //braces?
 import htm from 'https://cdn.skypack.dev/htm';
 
@@ -38,33 +39,39 @@ const Foo = props => {
   `;
 }
 
-//closure around?
-const Game = props => {
-  const [state, setState] = useState({streak: 0, task: props.taskGen()});
-  const keydown = e => {
+class Game extends Component {
+  constructor(props, taskGen) {
+    this.taskGen = taskGen;
+    alert('boo');
+    super(props);
+    this.state = {streak: 0};
+  }
+  keydown(e) {
     if (!(e.key == ' ' || e.key == 'Enter' || e.key == 'Backspace')) return; //abstract away?
     e.preventDefault();
     const ans = e.target.innerText;
     e.target.innerText = '';
-    const {task, streak} = state;
-    const passed = task.validate(ans);
-    setState({
-      streak: passed ? streak + 1 : 0,
-      task: passed ? props.taskGen() : task
+    //const {task, streak} = this.state;
+    const passed = this.state.task.validate(ans); //TODO WTF???
+    this.setState({
+      streak: passed ? this.state.streak + 1 : 0,
+      task: passed ? this.props.taskGen() : this.state.task
     });
   }
   //TODO floating underline
-  return ht`
-    <${Tree} title=${props.title}>
-      Q: ${state.task.question}
-      <div>
-        ${'A: '} 
-        <${Foo} onkeydown=${keydown}/>
-      <//>
-      streak: ${state.streak}
+  render() {
+    return ht`
+      <${Tree} title=${this.props.title}>
+        Q: ${this.state.task.question}
+        <div>
+          ${'A: '} 
+          <${Foo} onkeydown=${e => this.keydown(e)}/>
+        <//>
+        streak: ${this.state.streak}
 
-    <//>
-  `;
+      <//>
+    `;
+  }
 }
 
 function getRandomIntInclusive(min, max) {
@@ -73,12 +80,17 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
 }
 
-const add1 = () => {
-  const a = getRandomIntInclusive(0, 9);
-  const b = getRandomIntInclusive(0, 9);
-  return { //macro candidate - object with scoped properties
-    question: `${a} + ${b} = ???`,
-    validate: ans => parseInt(ans) === a + b,
+class Add1 extends Game {
+  constructor(props) {
+    super(props, this.taskGen); //TODO
+  }
+  taskGen() {
+    const a = getRandomIntInclusive(0, 9);
+    const b = getRandomIntInclusive(0, 9);
+    return { //macro candidate - object with scoped properties
+      question: `${a} + ${b} = ???`,
+      validate: ans => parseInt(ans) === a + b,
+    }
   }
 }
 
@@ -91,9 +103,9 @@ const App = props => {
         bar
         <div>boom<//>
         <u>hello uriel<//>
-        <${Game}
+        <${Add1}
          title='Walprawn'
-         taskGen=${add1}/>
+         />
       <//>
       <div>baz<//>
     <//>

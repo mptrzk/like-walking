@@ -26,18 +26,26 @@ wyżej wała nie podskoczysz
 don't put restrictions on the art of practicing
 
 skills
-  counting objects
-  addition
-    n digit
-    n number
-  different bases
-  subtraction
-  multiplication
-  decimal point
-  fractions
-  base conversion
-  guesstimates
-adjustable
+  memory
+    reversion
+    n-back
+  arithmetic
+    counting objects
+    addition
+      n digit
+      n number
+    accumulate
+    different bases
+    subtraction
+    multiplication
+    decimal point
+    fractions
+    base conversion
+  geometry
+    line length
+    figure area
+
+stuff like looking for a more convenient way to add 3 digits
 
 only restrict the user to the right results
   entering the correct answer with backspace is not the right result
@@ -95,8 +103,30 @@ failure at compression
 
 pushing a branch
 
+first do it slowly enough for certitude
+slowly enough to know whether you're going slowly enough
+slowly enough to be relaxed
+slowly enough to notice getting distracted
+slowly enough to let it sink in
+
+and I got to about 1031 and failed to add 8 and 3
+thought it was 12
+then I made 3 errors almost in a row
+
+
+
 ==================================================
 ;PREACT
+
+get signals to work
+
+or write them yourself
+
+checking what actually gets re-rendered
+
+how do hooks even know which function calls them
+
+how are props updated in class components?
 
 children
 
@@ -161,8 +191,12 @@ game generation
   problem
     wrestling with props syntax
     not performing unnecessary computation
+    optional config
   just pass titles and afns as props
   game as a class component
+    this and that, overall ugly
+    how about composition?
+  component as a method?
   closure around game component
     call that makeGame?
   makeGame that returns a game component
@@ -172,13 +206,17 @@ game generation
 
 key action
 
+action = {type, value}
+
 ==================================================
 ;TASK EXAMPLES
 
 type a string form memory
 count characters
 fraction arithmetic
-area of a triangle in an SVG
+area of an object in an SVG
+mean, mode, median
+would it be worth it
 
 
 ==================================================
@@ -192,7 +230,15 @@ underline
     yeah!
     make it line independent
     figure out how to remove that +1 hack
-     
+    why it is what it is
+      inline-block and clicking
+      masking and descenders
+      nbsp-s
+        how about floating div?
+  ^^^ onElementUpdate or something?
+  version with focus
+    revisit
+    why doesn't it work
 
 
 ==================================================

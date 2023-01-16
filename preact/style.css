@@ -5,17 +5,14 @@ body {
   color: #131;
 }
 
-.foo {
-  position: relative;
-}
 
-.bar {
+.ans-line {
   z-index: -2;
   position: absolute;
   text-decoration: underline;
 }
 
-.baz {
+.ans-mask {
   z-index: -1;
   position: absolute;
   background: #bdd;
@@ -23,10 +20,8 @@ body {
 
 .ans {
   display: inline-block;
-  padding-bottom: -0.1em;
-  /*border-bottom: 1.3px solid #131;*/
-  min-width: 3em;
   outline: transparent;
+  min-width: 3em;
   text-decoration: underline;
 }
 
