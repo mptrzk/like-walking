@@ -34,7 +34,8 @@ skills
     addition
       n digit
       n number
-    accumulate
+    append previous
+    interleave
     different bases
     subtraction
     multiplication
@@ -240,8 +241,14 @@ underline
     revisit
     why doesn't it work
 
+config with error message
+  
 
 ==================================================
 ;UNCATEGORIZED
 
+maybe do it the really dumb way before abstracting?
+
+I don't find myself lifting state really
+I start with it lifted and move it down when it really gets in the way
 

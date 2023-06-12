@@ -62,6 +62,8 @@ const randInt = (lo, hi) => lo + Math.floor((hi - lo + 1) * Math.random());
 //I might do it again eventually
 //on the other hand I can delete it for shits and giggles and maybe something good will come out of it in the end
 //whatever, just code more
+
+
 const taskGen = config => {
   const [first, ...rest] = Array.from(Array(config.numbers), () => randInt(0, Math.pow(10, config.digits)-1));
   const q = `${first}${''.concat(...rest.map(n => ` + ${n}`))} = ???`;
@@ -74,17 +76,17 @@ const taskGen = config => {
 const init = () => {
   const config = {
     /*
-    numbers: 2,
-    digits: 1,
     */
-    numbers: 11,
+    numbers: 2,
     digits: 1,
     /*
     numbers: 11,
+    digits: 1,
+    numbers: 11,
     digits: 2,
-    */
     numbers: 2,
     digits: 6,
+    */
   }
   return {
     streak: 0,
@@ -130,6 +132,8 @@ const App = props => {
   //can state be passed as a prop?
   //does it update stuff needlessly?
   //  ^^ yes
+  //  no?
+  //    it's not "it"
 }
 
 render(ht`<${App}/>`, document.body);
