@@ -113,6 +113,7 @@ const Game = props => {
     <//>
   `;
 }
+
 /*
         <p>
         The purpose of this tiny webapp is to help one train various mental tasks up to a level of
