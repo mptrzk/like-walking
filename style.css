@@ -31,3 +31,7 @@ body {
 .tree-content {
   margin-left: 1.2em;
 }
+
+.desc {
+  width: 50%;
+}

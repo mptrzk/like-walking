@@ -8,6 +8,10 @@ const ht = htm.bind(h);
 
 const Tree = props => {
   const [closed, setClosed] = useState(!!props.closed);
+  useEffect(() => {
+    if (closed) props.onClose?.();
+    else props.onOpen?.();
+  }, [closed]);
   return ht`
     <div onclick=${() => setClosed(!closed)}>
       <b>
@@ -25,7 +29,8 @@ const Tree = props => {
 }
 
 const Ans = props => {
-  const input = useRef(null);
+  //const input = useRef(null);
+  const input = props.ansRef ?? {current: null};
   const [maskLen, setMaskLen] = useState(0);
   const updateMask = () => {
     const val = input.current.innerText;
@@ -55,17 +60,9 @@ const Ans = props => {
 
 const randInt = (lo, hi) => lo + Math.floor((hi - lo + 1) * Math.random());
 
-//this feels inconvenient
-//it's because its generalized
-//or maybe it's easy, but I'm overthinking
-//it might come in handy later
-//I might do it again eventually
-//on the other hand I can delete it for shits and giggles and maybe something good will come out of it in the end
-//whatever, just code more
-
 
 const taskGen = config => {
-  const [first, ...rest] = Array.from(Array(config.numbers), () => randInt(0, Math.pow(10, config.digits)-1));
+  const [first, ...rest] = Array.from(Array(config.numbers), () => randInt(Math.pow(10, config.digits-1), Math.pow(10, config.digits)-1));
   const q = `${first}${''.concat(...rest.map(n => ` + ${n}`))} = ???`;
   return {
     q: q,
@@ -73,21 +70,7 @@ const taskGen = config => {
   }
 };
 
-const init = () => {
-  const config = {
-    /*
-    */
-    numbers: 2,
-    digits: 1,
-    /*
-    numbers: 11,
-    digits: 1,
-    numbers: 11,
-    digits: 2,
-    numbers: 2,
-    digits: 6,
-    */
-  }
+const init = config => {
   return {
     streak: 0,
     task: taskGen(config),
@@ -113,21 +96,73 @@ const update = (state, message) => {
   return _state;
 };
 
+const Game = props => {
+  const [state, msg] = useReducer(update, init(props.config));
+  const ansRef = {current: null};
+  const focus = () => ansRef.current.focus();
+  return ht`
+    <${Tree} title='${props.title}' closed=${props.closed ?? true} onOpen=${focus}>
+      <div style='margin-bottom: 0.6em' onclick=${focus}>
+        Q: ${state.task.q}
+        <br/>
+        ${'A: '}
+        <${Ans} msg=${msg} ansRef=${ansRef}/>
+        <br/>
+        <i>${`streak: ${state.streak}`}<//>
+      <//>
+    <//>
+  `;
+}
+/*
+        <p>
+        The purpose of this tiny webapp is to help one train various mental tasks up to a level of
+        mastery that a healthy adult posesses over walking.
+        </p>
+        <p>
+        People can walk for hours, taking thousands of steps, never falling or stumbling;
+        not having to be conscious of it.
+        </p>
+        <p>
+        If after a 10 mile walk, you misplace your foot and fall over, you're not really good at walking,
+        despite having taken tens of thousands of correct steps in succession.
+        </>
+*/
+
 const App = props => {
-  const [state, msg] = useReducer(update, init())
   return ht`
     <${Tree} title='About' closed>
-      foo <br/>
-      bar baz <br/>
+      <div class='desc'>
+      <//>
     <//>
-    <${Tree} title='baz'>
-      Q: ${state.task.q}
-      <br/>
-      ${'A: '}
-      <${Ans} msg=${msg} />
-      <br/>
-      <i>${`streak: ${state.streak}`}<//>
-    <//>
+    <${Game}
+      title='Single digit addition 1'
+      closed=${false}
+      config=${{
+        numbers: 2,
+        digits: 1
+      }}
+    />
+    <${Game}
+      title='Single digit addition 2'
+      config=${{
+        numbers: 11,
+        digits: 1
+      }}
+    />
+    <${Game}
+      title='Two digit addition 1'
+      config=${{
+        numbers: 2,
+        digits: 2
+      }}
+    />
+    <${Game}
+      title='Two digit addition 2'
+      config=${{
+        numbers: 11,
+        digits: 2
+      }}
+    />
   `;
   //can state be passed as a prop?
   //does it update stuff needlessly?
