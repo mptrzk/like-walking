@@ -97,7 +97,7 @@ const update = (state, message) => {
 };
 
 const Game = props => {
-  const [state, msg] = useReducer(update, init(props.config));
+  const [state, msg] = useReducer(update, null, () => init(props.config));
   const ansRef = {current: null};
   const focus = () => ansRef.current.focus();
   return ht`
